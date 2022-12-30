@@ -61,6 +61,10 @@ public:
 		mvwaddch(game_win, y, x, ch);
 	}
 
+	chtype getCharAt(int x, int y){
+		return mvwinch(game_win, y, x);
+	}
+
 	chtype getInput(){
 		return wgetch(game_win);
 	}

@@ -12,6 +12,8 @@ public:
 		board = Board();
 		game_over = false;
 		srand(time(0));
+
+		placeSnake();
 	}
 
 	~Game(){
@@ -65,6 +67,26 @@ public:
 		return game_over;
 	}
 
+	//reads the next position and interacts with it
+	void handleColision(SnakePiece next){
+		switch(board.getCharAt(next.getX(), next.getY())){
+		//empty space
+		case ' ':
+			board.add(Empty(snake.tail().getX(), snake.tail().getY()));
+			snake.removePiece();
+			break;
+		//point
+		case 'X':
+			removePoint();
+			//add points
+			break;
+		//border or snake piece
+		default:
+			game_over = true;
+			break;
+		}
+	}
+
 	//places snake and a point in upper left corner
 	void placeSnake(){
 		snake.setDirection(right);
@@ -90,13 +112,7 @@ public:
 
 	void moveSnake(){
 		SnakePiece next = snake.nextPiece();
-		if(!(next.getX() == point->getX() && next.getY() == point->getY())){	//removes tail piece if next position does not have a point
-			board.add(Empty(snake.tail().getX(), snake.tail().getY()));
-			snake.removePiece();
-		}
-		else{
-			removePoint();	//snake eats point
-		}
+		handleColision(next);
 		board.add(next);	//snake moves to next position
 		snake.addPiece(next);	//adds point on board if there is none
 	}
@@ -116,6 +132,7 @@ public:
 			board.add(*point);
 		}
 	}
+
 private:
 	Board board;
 	Point *point;

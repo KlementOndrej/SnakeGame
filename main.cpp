@@ -20,6 +20,5 @@ int main(int argc, char **argv){
 		game.redraw();
 	}
 
-	getch();
 	endwin();
 }
