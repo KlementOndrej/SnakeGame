@@ -18,7 +18,7 @@ public:
 		this->icon = '#';
 	}
 
-	SnakePiece(int x, int y)[
+	SnakePiece(int x, int y){
 		this->x = x;
 		this->y = y;
 		this->icon = '#';
@@ -31,11 +31,11 @@ public:
 		cur_dir = down;
 	}
 
-	addPiece(SnakePiece new_piece){
+	void addPiece(SnakePiece new_piece){
 		snake.push(new_piece);
 	}
 
-	removePiece(){
+	void removePiece(){
 		snake.pop();
 	}
 
@@ -45,6 +45,36 @@ public:
 
 	SnakePiece head(){
 		return snake.back();
+	}
+
+	SnakePiece nextPiece(){
+		int x = head().getX();
+		int y = head().getY();
+
+		switch(cur_dir){
+		case down:
+			y++;
+			break;
+		case up:
+			y--;
+			break;
+		case right:
+			x++;
+			break;
+		case left:
+			x--;
+			break;
+		}
+
+		return SnakePiece(x, y);
+	}
+
+	void setDirection(Direction dir){
+		cur_dir = dir;
+	}
+
+	Direction getDirection(){
+		return cur_dir;
 	}
 private:
 	std::queue<SnakePiece> snake;

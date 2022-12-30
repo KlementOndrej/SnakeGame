@@ -4,6 +4,7 @@
 #include "Stuff.hpp"
 #include "Point.hpp"
 #include "Empty.hpp"
+#include "Snake.hpp"
 
 class Game{
 public:
@@ -11,6 +12,28 @@ public:
 		board = Board();
 		game_over = false;
 		srand(time(0));
+
+		//testspace
+		snake.setDirection(right);
+
+		SnakePiece next = SnakePiece(1, 1);
+		board.add(next);
+		snake.addPiece(next);
+
+		next = snake.nextPiece();
+		board.add(next);
+		snake.addPiece(next);
+
+		snake.setDirection(down);
+
+		next = snake.nextPiece();
+		board.add(next);
+		snake.addPiece(next);
+
+		point = new Point(2, 4);
+		board.add(*point);
+
+		//testspace end
 	}
 
 	~Game(){
@@ -24,6 +47,18 @@ public:
 	void update(){
 		placePoint();
 
+		//test space
+		SnakePiece next = snake.nextPiece();
+		if(!(next.getX() == point->getX() && next.getY() == point->getY())){
+			board.add(Empty(snake.tail().getX(), snake.tail().getY()));
+			snake.removePiece();
+		}
+		else{
+			removePoint();
+		}
+		board.add(next);
+		snake.addPiece(next);
+		//test space end
 	}
 
 	void redraw(){
@@ -34,17 +69,23 @@ public:
 		return game_over;
 	}
 
+	void removePoint(){
+			board.add(Empty(point->getX(), point->getY()));
+			point = NULL;
+	}
+
+	//places point on board if there is none
 	void placePoint(){
-		int x, y;
-		board.findEmptyXY(x, y);
-
-		if (point != NULL) board.add(Empty(point->getX(), point->getY()));
-
-		point = new Point(x, y);
-		board.add(*point);
+		if (point == NULL){
+			int x, y;
+			board.findEmptyXY(x, y);
+			point = new Point(x, y);
+			board.add(*point);
+		}
 	}
 private:
 	Board board;
 	Point *point;
+	Snake snake;
 	bool game_over;
 };
