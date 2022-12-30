@@ -5,8 +5,8 @@
 
 enum Direction{
 	up,
-	down,
 	left,
+	down,
 	right
 };
 
@@ -70,7 +70,9 @@ public:
 	}
 
 	void setDirection(Direction dir){
-		cur_dir = dir;
+		if((cur_dir + dir)%2){	//prevents going in the same or oposite direction
+			cur_dir = dir;
+		}
 	}
 
 	Direction getDirection(){

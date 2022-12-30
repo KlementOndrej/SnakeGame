@@ -42,6 +42,30 @@ public:
 
 	void input(){
 		chtype ipt = board.getInput();
+
+		switch(ipt){
+		case KEY_UP:
+		case 'w':
+			snake.setDirection(up);
+			break;
+		case KEY_DOWN:
+		case 's':
+			snake.setDirection(down);
+			break;
+		case KEY_RIGHT:
+		case 'd':
+			snake.setDirection(right);
+			break;
+		case KEY_LEFT:
+		case 'a':
+			snake.setDirection(left);
+			break;
+		case 'p':
+			board.pause();
+			while(board.getInput() != 'p');
+			board.resume();
+			break;
+		}
 	}
 
 	void update(){

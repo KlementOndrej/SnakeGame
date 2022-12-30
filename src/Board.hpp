@@ -15,8 +15,11 @@ public:
 
 		game_win = newwin(HEIGHT, WIDTH, (yMax/2)-10, (xMax/2)-25);
 		addBorder();
+		keypad(game_win, true);
 		refresh();
 		srand(time(0));
+		game_speed = 1000;
+		wtimeout(game_win, game_speed);
 	}
 
 	void addBorder(){
@@ -27,6 +30,19 @@ public:
 		int maxX, maxY;
 		getmaxyx(game_win, maxY, maxX);
 		while(mvwinch(game_win, y = rand() % maxY, x = rand() % maxX) != ' ');
+	}
+
+	void setSpeed(unsigned short int speed){
+		game_speed = speed;
+		wtimeout(game_win, game_speed);
+	}
+
+	void pause(){
+		wtimeout(game_win, -1);
+	}
+
+	void resume(){
+		wtimeout(game_win, game_speed);
 	}
 
 	void clear(){
@@ -50,4 +66,5 @@ public:
 	}
 private:
 	WINDOW * game_win;
+	unsigned short int game_speed;
 };
