@@ -6,6 +6,8 @@
 #include "Empty.hpp"
 #include "Snake.hpp"
 
+//TODO: remove the usage of empty class, replace with blnk characther
+
 class Game{
 public:
 	Game(){
@@ -118,7 +120,8 @@ public:
 	}
 
 	void removePoint(){
-			board.add(Empty(point->getX(), point->getY()));
+			//board.add(Empty(point->getX(), point->getY()));
+			board.display(point->getX(), point->getY(), ' ');
 			delete point;
 			point = NULL;
 	}

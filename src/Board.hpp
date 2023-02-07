@@ -17,7 +17,7 @@ public:
 		addBorder();
 		keypad(game_win, true);
 		refresh();
-		srand(time(0));
+		//srand(time(0));
 		game_speed = 1000;
 		wtimeout(game_win, game_speed);
 	}
