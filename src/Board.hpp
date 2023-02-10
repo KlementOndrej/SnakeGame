@@ -22,6 +22,21 @@ public:
 		wtimeout(game_win, game_speed);
 	}
 
+	Board(int height, int width){
+		int xMax, yMax;
+		getmaxyx(stdscr, yMax, xMax);
+		starting_x =(xMax/2)-(width/2);
+		starting_y = (yMax/2)-(height/2);
+
+		game_win = newwin(height, width, (yMax/2)-(height/2), (xMax/2)-(width/2));
+		addBorder();
+		keypad(game_win, true);
+		refresh();
+		//srand(time(0));
+		game_speed = 1000;
+		wtimeout(game_win, game_speed);
+	}
+
 	void addBorder(){
 		box(game_win, 0, 0);
 	}
@@ -68,7 +83,16 @@ public:
 	chtype getInput(){
 		return wgetch(game_win);
 	}
+
+	int getStartingX(){
+		return starting_x;
+	}
+
+	int getStartingY(){
+		return starting_y;
+	}
 private:
 	WINDOW * game_win;
 	unsigned short int game_speed;
+	int starting_x, starting_y;
 };

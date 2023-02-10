@@ -3,15 +3,20 @@
 #include "Board.hpp"
 #include "Stuff.hpp"
 #include "Point.hpp"
-#include "Empty.hpp"
 #include "Snake.hpp"
+#include "Scoreboard.hpp"
 
 //TODO: remove the usage of empty class, replace with blnk characther
+
+#define HEIGHT 20
+#define WIDTH 50
 
 class Game{
 public:
 	Game(){
-		board = Board();
+		board = Board(HEIGHT, WIDTH);
+		score = 0;
+		scoreboard = Scoreboard(WIDTH, board.getStartingX(), board.getStartingY()+HEIGHT, score);
 		game_over = false;
 		srand(time(0));
 
@@ -63,6 +68,7 @@ public:
 
 	void redraw(){
 		board.refresh();
+		scoreboard.refresh();
 	}
 
 	bool isOver(){
@@ -74,13 +80,15 @@ public:
 		switch(board.getCharAt(next.getX(), next.getY())){
 		//empty space
 		case ' ':
-			board.add(Empty(snake.tail().getX(), snake.tail().getY()));
+			//board.add(Empty(snake.tail().getX(), snake.tail().getY()));
+			board.display(snake.tail().getX(), snake.tail().getY(), ' ');
 			snake.removePiece();
 			break;
 		//point
 		case 'X':
 			removePoint();
-			//add points
+			score++;
+			scoreboard.updateScore(score);
 			break;
 		//border or snake piece
 		default:
@@ -136,9 +144,14 @@ public:
 		}
 	}
 
+	int getScore(){
+		return score;
+	}
 private:
 	Board board;
+	Scoreboard scoreboard;
 	Point *point;
 	Snake snake;
 	bool game_over;
+	unsigned int score;
 };

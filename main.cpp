@@ -1,6 +1,7 @@
 #include <ncurses.h>
 #include "src/Board.hpp"
 #include "src/Game.hpp"
+#include <iostream>
 
 int main(int argc, char **argv){
 	initscr();
@@ -21,4 +22,6 @@ int main(int argc, char **argv){
 	}
 
 	endwin();
+
+	std::cout<<"Game over, score: "<<game.getScore()<<std::endl;
 }
