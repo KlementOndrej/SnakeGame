@@ -27,6 +27,10 @@ public:
 		delete point;
 	}
 
+	void end(){
+		board.clear();
+	}
+
 	void input(){
 		chtype ipt = board.getInput();
 
