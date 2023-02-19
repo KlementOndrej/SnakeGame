@@ -8,6 +8,7 @@ public:
 		draw();
 	}
 
+	//draws menu
 	void draw(){
 		menuwin = MenuWindow(2);
 		Option play = Option(0, "0:(P)lay");
@@ -20,6 +21,7 @@ public:
 		return is_running;
 	}
 
+	//handles input in menu
 	void input(){
 		chtype ipt = menuwin.getInput();
 
@@ -38,6 +40,7 @@ public:
 		}
 	}
 
+	//launches game
 	void play(){
 		Game game;
 

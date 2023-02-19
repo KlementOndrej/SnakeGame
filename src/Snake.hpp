@@ -10,6 +10,7 @@ enum Direction{
 	right
 };
 
+//piece of snake's body
 class SnakePiece: public Stuff{
 public:
 	SnakePiece(){
@@ -47,6 +48,7 @@ public:
 		return snake.back();
 	}
 
+	//creates new piece of snake in the direction where the snake is heading
 	SnakePiece nextPiece(){
 		int x = head().getX();
 		int y = head().getY();
@@ -69,6 +71,7 @@ public:
 		return SnakePiece(x, y);
 	}
 
+	//changes direction
 	void setDirection(Direction dir){
 		if((cur_dir + dir)%2){	//prevents going in the same or oposite direction
 			cur_dir = dir;

@@ -6,8 +6,6 @@
 #include "Snake.hpp"
 #include "Scoreboard.hpp"
 
-//TODO: remove the usage of empty class, replace with blnk characther
-
 #define HEIGHT 20
 #define WIDTH 50
 
@@ -64,12 +62,14 @@ public:
 		}
 	}
 
+	//updates gamestate
 	void update(){
 		placePoint();
 
 		moveSnake();
 	}
 
+	//refreshes scoreboard and gameboard
 	void redraw(){
 		board.refresh();
 		scoreboard.refresh();
@@ -84,8 +84,7 @@ public:
 		switch(board.getCharAt(next.getX(), next.getY())){
 		//empty space
 		case ' ':
-			//board.add(Empty(snake.tail().getX(), snake.tail().getY()));
-			board.display(snake.tail().getX(), snake.tail().getY(), ' ');
+			board.display(snake.tail().getX(), snake.tail().getY(), ' ');	//removes tail of the snake
 			snake.removePiece();
 			break;
 		//point
@@ -131,8 +130,8 @@ public:
 		snake.addPiece(next);	//adds point on board if there is none
 	}
 
+	//removes point from game
 	void removePoint(){
-			//board.add(Empty(point->getX(), point->getY()));
 			board.display(point->getX(), point->getY(), ' ');
 			delete point;
 			point = NULL;

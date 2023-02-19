@@ -41,12 +41,14 @@ public:
 		box(game_win, 0, 0);
 	}
 
+	//finds empty coordinate on board
 	void findEmptyXY(int& x, int& y){
 		int maxX, maxY;
 		getmaxyx(game_win, maxY, maxX);
 		while(mvwinch(game_win, y = rand() % maxY, x = rand() % maxX) != ' ');
 	}
 
+	//sets timeout of board
 	void setSpeed(unsigned short int speed){
 		game_speed = speed;
 		wtimeout(game_win, game_speed);
@@ -68,14 +70,17 @@ public:
 		wrefresh(game_win);
 	}
 
+	//displays object from Stuff(for example Point) class on board
 	void add(Stuff something){
 		display(something.getX(), something.getY(), something.getIcon());
 	}
 
+	//displays character on specified location on board
 	void display(int x, int y, chtype ch){
 		mvwaddch(game_win, y, x, ch);
 	}
 
+	//returns character displayed at specified location on board
 	chtype getCharAt(int x, int y){
 		return mvwinch(game_win, y, x);
 	}
@@ -84,10 +89,12 @@ public:
 		return wgetch(game_win);
 	}
 
+	//returns x coordinate of upper left corner of board
 	int getStartingX(){
 		return starting_x;
 	}
 
+	//returns y coordinate of upper left corner of board
 	int getStartingY(){
 		return starting_y;
 	}

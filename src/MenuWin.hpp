@@ -33,6 +33,8 @@ private:
 	int index;
 };
 
+
+//this class handles displaying menu
 class MenuWindow{
 public:
 	MenuWindow(){
@@ -57,6 +59,7 @@ public:
 		refresh();
 	}
 
+	//prints option into the menu window
 	void printOption(Option option){
 		mvwprintw(menu_win, option.getIndex()+1, 1, option.getName().c_str());
 	}

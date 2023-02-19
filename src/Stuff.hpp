@@ -1,5 +1,6 @@
 #pragma once
 
+//parent class of stuff to be used in game and displayed
 class Stuff{
 public:
 	Stuff(){

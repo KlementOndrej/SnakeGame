@@ -12,6 +12,7 @@ public:
 		refresh();
 	}
 
+	//writes new score
 	void updateScore(unsigned int score){
 		mvwprintw(score_win, 0, score_win->_maxx - 10, "%11lu", score);
 	}
